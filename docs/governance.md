@@ -6,4 +6,6 @@ Dados públicos continuam sujeitos a necessidade e finalidade. O guia evita dado
 
 O canal de contato não exige cadastro. Seus dados são usados apenas para responder à mensagem e não devem ser incluídos em issues, documentação ou telemetria. Solicitações de correção, remoção ou direitos são tratadas em canal privado.
 
+Mudanças editoriais passam por revisão de fonte, contexto, data de consulta e compatibilidade de uso. Uma integração pode ser tecnicamente possível e ainda assim não ser adotada se os termos, a licença ou o tratamento de dados não forem suficientemente claros. Conteúdo novo só alcança a navegação pública após validação local de texto, fonte, aparência e responsividade.
+
 Esta documentação registra práticas de produto, não constitui parecer jurídico. Questões materiais de direitos autorais, LGPD, monetização ou notificação de titular exigem revisão jurídica especializada no Brasil.

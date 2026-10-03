@@ -9,7 +9,6 @@ O GOBPS é um guia aberto sobre instituições, representantes, eleições, conc
 - Arquitetura e fronteiras entre frontend, backend e fontes públicas.
 - Decisões de engenharia, contratos de dados, testes, observabilidade e resiliência.
 - Critérios de fontes, privacidade, acessibilidade e publicação.
-- Um estudo de caso que pode ser usado em entrevistas técnicas.
 
 ## O que ele não contém
 
