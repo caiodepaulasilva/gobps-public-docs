@@ -42,6 +42,12 @@ As dependências apontam para dentro. Um controller não acessa arquivo, relógi
 
 O BFF é a fronteira de contrato. O Astro valida respostas em tempo de execução com schemas; campos indispensáveis não são convertidos por coerção insegura. Mudanças incompatíveis exigem versionamento explícito ou adaptação coordenada, acompanhada de testes de contrato.
 
+## Organização do código
+
+Controllers são organizados por jornada funcional e mantidos pequenos: fazem binding, chamam um caso de uso e traduzem o resultado para HTTP. Casos de uso orquestram uma operação. Serviços concentram regras especializadas e integrações. Repositórios isolam leitura de JSON e escritas editoriais controladas. Essa divisão aplica responsabilidade única e inversão de dependência sem criar módulos vazios.
+
+O projeto permanece em um assembly enquanto isso mantém o custo de manutenção baixo. As fronteiras já permitem separar domínio, aplicação, infraestrutura e API caso o crescimento torne essa divisão necessária.
+
 ## Resiliência e desempenho
 
 - Clientes HTTP têm timeout, retry limitado e cancelamento propagado.

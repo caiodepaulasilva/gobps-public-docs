@@ -13,6 +13,8 @@
 - Revisões para conteúdo, fonte, responsividade, contraste, teclado e celular.
 - Testes visuais progressivos com Playwright para jornadas críticas.
 
+Testes de integração usam clientes HTTP falsos somente no ambiente de teste. Eles tornam cenários de indisponibilidade e contratos determinísticos; nunca se tornam respostas alternativas de produção.
+
 ## Observabilidade responsável
 
 O sistema mede falhas, duração, indisponibilidade de fonte e entrega do formulário por eventos agregados. Não mede navegação individual, nem inclui nome, e-mail, IP, token, corpo de formulário ou URL com parâmetros nos logs. As mensagens usam catálogo controlado e campos estáveis para permitir análise humana sem vazar dados.

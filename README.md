@@ -43,10 +43,10 @@ O frontend entrega jornadas editoriais rápidas e acessíveis. O backend concent
 ## Mapa da documentação
 
 - [Arquitetura](docs/architecture.md)
+- [Interface e experiência](docs/frontend.md)
 - [Qualidade e ciclo de entrega](docs/quality.md)
 - [Governança de dados e privacidade](docs/governance.md)
 - [Decisões registradas](docs/decisions/)
-- [Estudo de caso para portfólio](docs/portfolio-case-study.md)
 - [Política de segurança](SECURITY.md)
 
 ## Estado do projeto
