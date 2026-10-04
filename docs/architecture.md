@@ -42,6 +42,12 @@ As dependências apontam para dentro. Um controller não acessa arquivo, relógi
 
 O BFF é a fronteira de contrato. O Astro valida respostas em tempo de execução com schemas; campos indispensáveis não são convertidos por coerção insegura. Mudanças incompatíveis exigem versionamento explícito ou adaptação coordenada, acompanhada de testes de contrato.
 
+### Modelos de leitura e rotas
+
+O BFF expõe modelos de leitura voltados às jornadas do guia, e não espelhos diretos de tabelas, páginas externas ou arquivos de origem. Uma rota de ministério, por exemplo, reúne descrição editorial, cronologia, fontes e dados financeiros sem delegar essa composição ao navegador. Isso reduz acoplamento com formatos de terceiros e evita que cada página precise conhecer regras de normalização.
+
+Consultas são tratadas como operações REST: recursos possuem rotas estáveis, filtros usam parâmetros explícitos e entradas inválidas recebem resposta de validação. Falhas previsíveis usam Problem Details; indisponibilidade de uma origem é distinta de recurso inexistente e nunca é convertida em dado estimado.
+
 ## Dados e proveniência
 
 Repositórios isolam os arquivos JSON editoriais versionados até que exista uma fonte de dados adequada para substituí-los. Integrações públicas passam por adaptadores próprios, que registram a fonte, a data de consulta e a finalidade quando aplicável. Um link ou crédito não substitui a avaliação de licença ou de termos de uso.
@@ -52,6 +58,10 @@ Controllers são organizados por jornada funcional e mantidos pequenos: fazem bi
 
 O projeto permanece em um assembly enquanto isso mantém o custo de manutenção baixo. As fronteiras já permitem separar domínio, aplicação, infraestrutura e API caso o crescimento torne essa divisão necessária.
 
+### Composição e injeção de dependências
+
+O ponto de composição registra interfaces e implementações de repositórios, serviços, casos de uso, clientes HTTP, cache e telemetria. Essa escolha deixa dependências visíveis, facilita testes com substitutos controlados e impede que detalhes de infraestrutura se espalhem pelo domínio. O objetivo não é reproduzir uma arquitetura distribuída em miniatura: cada abstração existe quando protege uma regra, uma integração ou uma variação real do sistema.
+
 ## Resiliência e desempenho
 
 - Clientes HTTP têm timeout, retry limitado e cancelamento propagado.
@@ -60,6 +70,14 @@ O projeto permanece em um assembly enquanto isso mantém o custo de manutenção
 - Atualizações de catálogos custosos podem iniciar em segundo plano após a aplicação estar saudável; uma falha nunca bloqueia a aplicação inteira.
 - Dados que exigem resposta completa não recebem estimativas nem valores substitutos.
 - Chamadas externas são limitadas e identificadas para reduzir risco de sobrecarga ou bloqueio de provedores.
+
+O cache é empregado como proteção de desempenho e de provedores, não como substituição de verdade. Catálogos e consultas custosas têm duração compatível com sua volatilidade; dados de execução financeira e consultas públicas deixam clara a data ou a eventual indisponibilidade. O BFF prefere uma resposta explícita de indisponibilidade a servir um número inventado ou um valor antigo sem contexto.
+
+## Operação e infraestrutura
+
+O frontend estático e o BFF são implantados separadamente, com variáveis de configuração e credenciais mantidas fora do código. A separação permite que a interface seja distribuída com cache de borda, enquanto integrações, regras de negócio e chaves de fontes públicas permanecem no servidor. O desenho também reduz a superfície exposta ao navegador: ele só conhece a URL pública necessária para consumir os contratos.
+
+Pipelines automatizados validam dependências, contratos, tipo, build e jornadas de interface antes da integração. A publicação ocorre a partir da branch principal e os ambientes não recebem segredos por arquivos versionados. Logs e métricas agregados acompanham falhas, latência e indisponibilidade sem registrar dados de visitantes ou detalhes operacionais que ampliem risco.
 
 ## Respostas HTTP e falhas esperadas
 

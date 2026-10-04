@@ -45,7 +45,6 @@ O frontend entrega jornadas editoriais rápidas e acessíveis. O backend concent
 - [Interface e experiência](docs/frontend.md)
 - [Qualidade e ciclo de entrega](docs/quality.md)
 - [Governança de dados e privacidade](docs/governance.md)
-- [Decisões registradas](docs/decisions/)
 - [Política de segurança](SECURITY.md)
 
 ## Estado do projeto

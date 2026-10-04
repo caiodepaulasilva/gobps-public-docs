@@ -15,6 +15,12 @@
 
 O workflow de CI executa as verificações antes de integrar mudanças. Dependabot acompanha atualizações de dependências; a revisão humana continua necessária para avaliar impacto de contrato, origem de dados, acessibilidade e comportamento em celular.
 
+### Pirâmide de verificação
+
+Testes de unidade do BFF cobrem regras, normalização e resultados de casos de uso. Testes de contrato verificam que os campos indispensáveis retornados pelos endpoints correspondem aos schemas que o Astro aceita. A camada de interface usa Playwright para percorrer jornadas críticas, incluindo filtros, comparação, guia de votação, navegação móvel e ausência de rolagem horizontal.
+
+O objetivo não é buscar cobertura numérica isolada. Cada teste protege um comportamento de produto ou uma fronteira importante: uma alteração de contrato não deve produzir tela parcialmente interpretada, um provedor indisponível deve ser comunicado de forma clara e uma mudança visual não deve quebrar uma jornada em celular.
+
 Testes de integração usam clientes HTTP falsos somente no ambiente de teste. Eles tornam cenários de indisponibilidade e contratos determinísticos; nunca se tornam respostas alternativas de produção.
 
 ## Segurança e configuração
@@ -30,6 +36,12 @@ Métricas e logs apoiam a operação: tornam visíveis latência, falhas de orig
 ## Automação com revisão humana
 
 Atualizações automatizadas preservam o último catálogo válido quando uma fonte falha e não promovem arquivos parciais. A automação reduz tarefas repetitivas; fatos políticos, cronologias, fontes, licenças e decisões editoriais continuam sujeitos à revisão humana antes da publicação.
+
+## Entrega e reversibilidade
+
+Uma pull request reúne contexto, evidências e checklist de fonte, contrato, acessibilidade, celular e segurança. A integração em `development` reduz o risco de publicar mudanças isoladas diretamente em produção; `main` representa a versão pública. Dependências automatizadas recebem o mesmo fluxo de validação das demais alterações.
+
+Publicações são deliberadamente pequenas quando possível. Uma alteração pode ser revertida pela própria trilha de Git sem exigir edição manual em servidores, e um incidente de origem externa não autoriza dados substitutos. Essa combinação favorece recuperação rápida e histórico auditável.
 
 ## Definition of Done
 

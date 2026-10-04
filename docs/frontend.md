@@ -8,6 +8,12 @@ Componentes de composição como layout, navegação de retorno, abas e coleçõ
 
 Páginas Astro mantêm marcação, composição e estilos. Interações maiores saem delas para módulos TypeScript com inicialização explícita, o que permite testar comportamento sem transformar cada detalhe visual em uma abstração. O Guia de Votação orienta a linguagem das experiências interativas: instrução antes da ação, foco visível, teclado, progressão clara e informação sem caixas decorativas em excesso.
 
+### Estratégia de renderização
+
+Conteúdo editorial que pode ser composto com segurança é gerado na construção do site. Informações que dependem de consulta, filtro ou atualização posterior permanecem sob responsabilidade do BFF e são solicitadas apenas quando a jornada exige. Essa divisão reduz JavaScript entregue, preserva velocidade de navegação e evita incorporar segredos, chaves ou regras de fonte em artefatos estáticos.
+
+As páginas não tentam adivinhar o formato de uma resposta. Schemas de runtime validam coleções e detalhes antes de renderizar; view models mantêm a apresentação separada da forma bruta de origem. Quando uma interação precisa de estado — comparação, filtros, simuladores ou colinha — o módulo associado domina somente aquele estado e não altera o restante da página.
+
 ## Dados no navegador
 
 O Astro não mantém catálogos políticos locais. Cada resposta vinda do BFF é validada em tempo de execução antes de virar um view model. Quando uma fonte obrigatória estiver indisponível, a interface não inventa valores; ela comunica a limitação ou omite apenas complementos previamente classificados como opcionais.
@@ -21,3 +27,7 @@ Os schemas de validação são a fronteira do navegador: campos indispensáveis 
 Fluxos interativos incluem foco perceptível, navegação por teclado, regiões de anúncio e estados claros de seleção. Imagens recebem dimensões explícitas para reduzir mudanças de layout. A revisão inclui celular, ausência de rolagem horizontal, contraste e preferência por redução de movimento.
 
 O site usa componentes de retorno e ações principais consistentes. Links externos que são o próximo passo usam o mesmo padrão de ação preenchida; referências permanecem discretas. Essa distinção evita que uma fonte pareça um botão de operação e mantém a jornada legível.
+
+### Desempenho percebido
+
+Prioriza-se conteúdo útil antes de elementos complementares: imagens têm dimensões definidas e carregamento tardio quando apropriado; consultas repetidas podem ser deduplicadas; painéis que dependem de fonte externa iniciam somente ao serem solicitados. Esses critérios reduzem espera sem esconder falhas de origem e sem transformar dados públicos em cópias locais não auditadas.
